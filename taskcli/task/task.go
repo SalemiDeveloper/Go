@@ -271,6 +271,41 @@ func Done(filename string, id int) error {
 	return nil
 }
 
+/* Função para excluir uma tarefa.
+
+. Carrega a lista de tarefas existente.
+	. Se ocorrer um erro ao carregar a lista de tarefas, retorna um erro.
+. Cria uma nova lista de tarefas a serem excluídas.
+	. Se a tarefa foi encontrada, não a inclui na nova lista de tarefas.
+	. Se a tarefa não foi encontrada, a inclui na nova lista de tarefas.
+. Verifica se a tarefa foi encontrada.
+	. Se a tarefa não foi encontrada, imprime uma mensagem informando.
+. Salva a nova lista de tarefas.
+
+
+
+tasks, err := LoadTasks(filename) -> Carrega a lista de tarefas existente do arquivo especificado pelo parâmetro 'filename'.
+
+if err != nil {...}               -> Verifica se ocorreu um erro ao carregar a lista de tarefas. Se sim, retorna erro.
+
+newTasks := []Task{}              -> Cria uma nova lista de tarefas vazia.
+
+for _, t := range tasks {...}     -> Procura a tarefa com o ID especificado.
+
+if t.ID == id {...}               -> Se a tarefa foi encontrada, não a inclui na nova lista e imprime uma mensagem de confirmação.
+
+newTasks = append(newTasks, t)    -> Se a tarefa não foi encontrada, a inclui na nova lista.
+
+if !found {...}                   -> Verifica se a tarefa foi encontrada. Se não foi, imprime uma mensagem informando.
+
+return SaveTasks(filename, newTasks) -> Salva a nova lista de tarefas.
+
+OBSERVAÇÕES:
+ - A função 'LoadTasks()' é usada para carregar a lista de tarefas existente.
+ - A função 'SaveTasks()' é usada para salvar a nova lista de tarefas.
+ - A tarefa é excluída da lista de tarefas criando uma nova lista sem a tarefa a ser excluída.
+ - Se a tarefa não for encontrada, uma mensagem é impressa informando que a tarefa não existe.
+*/
 func Delete(filename string, id int) error {
 	tasks, err := LoadTasks(filename)
 	if err != nil {
