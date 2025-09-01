@@ -1,0 +1,13 @@
+# Binários do Go
+taskcli
+taskcli.exe
+
+# Arquivos de teste
+*.test
+*.out
+
+# Arquivo de dados local
+tasks.json
+
+# Dependências baixadas pelo Go (se usar vendor/)
+vendor/
