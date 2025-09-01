@@ -15,37 +15,37 @@ type Task struct {
 	DoneAt    *time.Time `json:"done_at,omitempty"`
 }
 
-/* Função para carregar uma lista de tarefas de um arquivo JSON.
+/* FunÃ§Ã£o para carregar uma lista de tarefas de um arquivo JSON.
 
-. Abre o arquivo especificado pelo parâmetro filename
-	. Se o arquivo não existir, retorna uma lista vazia e um erro nil.
+. Abre o arquivo especificado pelo parÃ¢metro filename
+	. Se o arquivo nÃ£o existir, retorna uma lista vazia e um erro nil.
 	. Se ocorreu um arro ao abrir o arquivo, retorna um erro.
-. Cria uma variável para armazenar a lista de tarefas.
-. Deserializa o conteúdo do arquivo JSON em uma lista de tarefas.
+. Cria uma variÃ¡vel para armazenar a lista de tarefas.
+. Deserializa o conteÃºdo do arquivo JSON em uma lista de tarefas.
 	. Se ocorrer um erro ao deserializar o JSON, retorna um erro.
 . Retorna a lista de tarefas carregadas com sucesso.
 
 
 
-file, err := os.ReadFile(filename) -> Esta linha linha abre o arquivo especificado pelo parâmetro 'filename' 
-                                   e armazena o conteúdo do arquivo em uma variável 'file'. O parâmetro 'err' 
-								   é usado para armazenar qualquer erro que ocorra durante a abertura 
+file, err := os.ReadFile(filename) -> Esta linha linha abre o arquivo especificado pelo parÃ¢metro 'filename' 
+                                   e armazena o conteÃºdo do arquivo em uma variÃ¡vel 'file'. O parÃ¢metro 'err' 
+								   Ã© usado para armazenar qualquer erro que ocorra durante a abertura 
 								   do arquivo.
 
-if err := nil {...}                -> Esta seção verifica se ocorreu um erro ao abrir o arquivo. Se o erro for 'nil', 
+if err := nil {...}                -> Esta seÃ§Ã£o verifica se ocorreu um erro ao abrir o arquivo. Se o erro for 'nil', 
           			               significa que o arquivo foi aberto com sucesso.
 
-if os.IsNotExist(err) {...}        -> Esta seção verifica se o erro é um erro de arquivo não encontrado. Se for, retorna
-							       uma lista vazia e um erro 'nil', indicando que o arquivo não existe.
+if os.IsNotExist(err) {...}        -> Esta seÃ§Ã£o verifica se o erro Ã© um erro de arquivo nÃ£o encontrado. Se for, retorna
+							       uma lista vazia e um erro 'nil', indicando que o arquivo nÃ£o existe.
 
-return nil, err                    -> Se ocorreu um erro ao abrir o arquivo e não é um erro de arquivo não encontrado, retorna um erro.
+return nil, err                    -> Se ocorreu um erro ao abrir o arquivo e nÃ£o Ã© um erro de arquivo nÃ£o encontrado, retorna um erro.
 
-var tasks []Task                   -> Cria uma variável para armazenar a lista de tarefas.
+var tasks []Task                   -> Cria uma variÃ¡vel para armazenar a lista de tarefas.
 
-err = json.Unmarshal(file, &tasks) -> Deserializa o conteúdo do arquivo JSON em uma lista de tarefas. O parâmetro
-                                      '&tasks' é uma referência à variável 'tasks' que foi criada anteriomente.
+err = json.Unmarshal(file, &tasks) -> Deserializa o conteÃºdo do arquivo JSON em uma lista de tarefas. O parÃ¢metro
+                                      '&tasks' Ã© uma referÃªncia Ã  variÃ¡vel 'tasks' que foi criada anteriomente.
 
-2° if err != nil {...}             -> Verifica se ocorreu um erro ao deserializar o JSON. Se for, retorna um erro.
+2Â° if err != nil {...}             -> Verifica se ocorreu um erro ao deserializar o JSON. Se for, retorna um erro.
 
 return tasks, nil                  -> Retorna a lista de tarefas carregadas com sucesso.
 */
@@ -68,29 +68,29 @@ func LoadTasks(filename string) ([]Task, error) {
 	return tasks, nil
 }
 
-/* Função para salvar uma lista de tarefas em um arquivo JSON.
+/* FunÃ§Ã£o para salvar uma lista de tarefas em um arquivo JSON.
 
 . Serializa a lista de tarefas em um JSON.
 	. Se ocorrer um erro ao serializar o JSON, retorna um erro.
-. Salva o JSON no arquivo especificado pelo parâmetro filename.
+. Salva o JSON no arquivo especificado pelo parÃ¢metro filename.
 
 
 
-data, err := json.MarshalIndent(tasks, "", "  ") -> Esta linha serializa a lista de tarefas em um JSON. O parâmetro 'tasks' é a lista de tarefas
-                                                 a ser serializada. O parâmetro 'json.MarshalIndent' é usado para formatar o JSON com indentação.
-												 parâmetro 'err' é usado para armazenar qualquer erro que ocorrer durante a serialização.
+data, err := json.MarshalIndent(tasks, "", "  ") -> Esta linha serializa a lista de tarefas em um JSON. O parÃ¢metro 'tasks' Ã© a lista de tarefas
+                                                 a ser serializada. O parÃ¢metro 'json.MarshalIndent' Ã© usado para formatar o JSON com indentaÃ§Ã£o.
+												 parÃ¢metro 'err' Ã© usado para armazenar qualquer erro que ocorrer durante a serializaÃ§Ã£o.
 
 ir err := nil {...}	                             -> Verifica se ocorreu um erro ao serializar o JSON. Se sim, retorna um erro.
 
-return os.WriteFile(filename, data, 0644)        -> Salva o JSON no arquivo especificado pelo parâmetro 'filename'. O parâmetro 'data' é o JSON 
-                                                 serializado anteriormente. O parâmetro '0644' é o modo de permissão do arquivo, que significa 
-												 que o arquivo será criado com permissão de leitura e escrita para o proprietário e permissão de 
+return os.WriteFile(filename, data, 0644)        -> Salva o JSON no arquivo especificado pelo parÃ¢metro 'filename'. O parÃ¢metro 'data' Ã© o JSON 
+                                                 serializado anteriormente. O parÃ¢metro '0644' Ã© o modo de permissÃ£o do arquivo, que significa 
+												 que o arquivo serÃ¡ criado com permissÃ£o de leitura e escrita para o proprietÃ¡rio e permissÃ£o de 
 												 leitura para os outros.
 
-OBSERVAÇÃO: 
- - A função 'json.MarshalIndent' é usada para formatar o JSON com indentação, o que torna mais fácil de ler e entender o JSON gerado.
- - A função 'is.WriteFile' é usada para salvar o JSON no arquivo. Ela substitui o conteúdo do arquivo existente, se ele existir.
- - O modo de permissão '0644' é um valor comum para arquivos ded texto, que permite que o proprietário leia e escreva no arquivo, e os outros apenas leiam.
+OBSERVAÃ‡ÃƒO: 
+ - A funÃ§Ã£o 'json.MarshalIndent' Ã© usada para formatar o JSON com indentaÃ§Ã£o, o que torna mais fÃ¡cil de ler e entender o JSON gerado.
+ - A funÃ§Ã£o 'is.WriteFile' Ã© usada para salvar o JSON no arquivo. Ela substitui o conteÃºdo do arquivo existente, se ele existir.
+ - O modo de permissÃ£o '0644' Ã© um valor comum para arquivos ded texto, que permite que o proprietÃ¡rio leia e escreva no arquivo, e os outros apenas leiam.
 */
 
 func SaveTasks(filename string, tasks []Task) error {
@@ -101,39 +101,39 @@ func SaveTasks(filename string, tasks []Task) error {
 	return os.WriteFile(filename, data, 0644)
 }
 
-/* Função para adicionar uma nova tarefa à lista de tarefas
+/* FunÃ§Ã£o para adicionar uma nova tarefa Ã  lista de tarefas
 
 . Carrega a lista de tarefas existente.
 	. Se ocorrer um erro ao carregar a lista de tarefas, retorna um erro.
 . Gera um novo ID para a tarefa.
-	. Se a lista de tarefas não estiver vazia, gera um novo ID baseado no último ID existente.
-. Adiciona a nova tarefa à lista de tarefas.
+	. Se a lista de tarefas nÃ£o estiver vazia, gera um novo ID baseado no Ãºltimo ID existente.
+. Adiciona a nova tarefa Ã  lista de tarefas.
 . Salva a lista de tarefas atualizada.
-. Imprime uma mensagem de confirmação.
+. Imprime uma mensagem de confirmaÃ§Ã£o.
 . Retorna sem erro.
 
-tasks, err := LoadTasks(filename) -> Carrega a lista de tarefas existente do arquivo especificado pelo parâmetro 'filename'.
+tasks, err := LoadTasks(filename) -> Carrega a lista de tarefas existente do arquivo especificado pelo parÃ¢metro 'filename'.
 
 if err != nil {...}               -> Verifica se ocorreu um erro ao carregar a lista de tarefas. Se sim, retorna um erro.
 
 id := 1                           -> Gera um novo ID para a tarefa.
 
-if len(tasks) > 0 {...}           -> Se a lista de tarefas não estiver vazia, gera um novo ID baseado no último ID existente.
+if len(tasks) > 0 {...}           -> Se a lista de tarefas nÃ£o estiver vazia, gera um novo ID baseado no Ãºltimo ID existente.
 
-t := Tasks{...}                   -> Cria uma nova tarefa com o título e o novo ID.
+t := Tasks{...}                   -> Cria uma nova tarefa com o tÃ­tulo e o novo ID.
 
-tasks = append(tasks, t)          -> Adiciona a nova tarefa à lista de tarefas.
+tasks = append(tasks, t)          -> Adiciona a nova tarefa Ã  lista de tarefas.
 
 if err := SaveTasks(filename, tasks); err != nil {...} -> Salva a lista de tarefas atualizada e verifica se ocorreu um erro. Se sim, retorna um erro.
 
-fmt.Println("Tarefa adicionada:", title)               -> Imprime uma mensagem de confirmação.
+fmt.Println("Tarefa adicionada:", title)               -> Imprime uma mensagem de confirmaÃ§Ã£o.
 
 return nil                        -> Retorna sem erro.
 
-OBSERVAÇÕES:
- - A função 'LoadTasks' é usada para carregar a lista de tarefas existente.
- - A função 'SaveTasks' é usada para salvar a lista de tarefas atualizada.
- - O novo ID é gerado baseado no último ID existente, se a lista de tarefas não estiver vazia.
+OBSERVAÃ‡Ã•ES:
+ - A funÃ§Ã£o 'LoadTasks' Ã© usada para carregar a lista de tarefas existente.
+ - A funÃ§Ã£o 'SaveTasks' Ã© usada para salvar a lista de tarefas atualizada.
+ - O novo ID Ã© gerado baseado no Ãºltimo ID existente, se a lista de tarefas nÃ£o estiver vazia.
 */
 
 func Add(filename, title string) error {
@@ -158,27 +158,27 @@ func Add(filename, title string) error {
 	if err := SaveTasks(filename, tasks); err != nil {
 		return err
 	}
-	fmt.Println("Tarefa adicionada:", title)
+	fmt.Println("Tarefa adicionada:\"", title, "\"")
 	return nil
 }
 
-/* Função para listar todas as tarefas
+/* FunÃ§Ã£o para listar todas as tarefas
 
 . Carrega a lista de tarefas existente.
 	. Se ocorrer um erro ao carregar a lista de tarefas, retorna um erro.
-. Verifica se a lista de tarefas está vazia.
-	. Se a lista de tarefas estiver vazia, imprime uma mensagem informando que não há tarefas.
-. Imprime o cabeçalho de lista de tarefas.
+. Verifica se a lista de tarefas estÃ¡ vazia.
+	. Se a lista de tarefas estiver vazia, imprime uma mensagem informando que nÃ£o hÃ¡ tarefas.
+. Imprime o cabeÃ§alho de lista de tarefas.
 . Itera sobre a lista de tarefas e imprime cada tarefa.
-	. Formata a data de criação da tarefa.
+	. Formata a data de criaÃ§Ã£o da tarefa.
 	. Imprime a tarefa.
 . Retorna sem erro.
 
-tasks, err := LoadTasks(filename) -> Carrega a lista de tarefas existente do arquivo especificado pelo parâmetro 'filename'.
+tasks, err := LoadTasks(filename) -> Carrega a lista de tarefas existente do arquivo especificado pelo parÃ¢metro 'filename'.
 
 if err := nil {...}               -> Verifica se ocorreu um erro ao carregar a lista de tarefas. Se sim, retorna um erro.
 
-if len(tasks) == 0 {...}          -> Verifica se a lista de tarefas está vazia. Se sim, imprime uma mensagem informando que não há tarefas e retorna sem erro.
+if len(tasks) == 0 {...}          -> Verifica se a lista de tarefas estÃ¡ vazia. Se sim, imprime uma mensagem informando que nÃ£o hÃ¡ tarefas e retorna sem erro.
 
 for _, t := range tasks {...}     -> Itera sobre a lista de tarefas e imprime cada tarefa.
 
@@ -209,37 +209,37 @@ func List(filename string) error {
 	return nil
 }
 
-/* Função para marcar uma tarefa como concluída
+/* FunÃ§Ã£o para marcar uma tarefa como concluÃ­da
 
 . Carrega a lista de tarefas existente.
 	. Se ocorrer um erro ao carregar a lista de tarefas, retorna um erro
-. Itera sobre a lista de tarefas e verifica se a tarefa com o ID especificado pelo parâmetro id existe.
-	. Se a tarefa existir, verifica se ela já foi concluída.
-	. Se a tarefa ainda não foi concluída, marca ela como concluída e atualiza a data de conclusão.
+. Itera sobre a lista de tarefas e verifica se a tarefa com o ID especificado pelo parÃ¢metro id existe.
+	. Se a tarefa existir, verifica se ela jÃ¡ foi concluÃ­da.
+	. Se a tarefa ainda nÃ£o foi concluÃ­da, marca ela como concluÃ­da e atualiza a data de conclusÃ£o.
 . Salva a lista de tarefas atualizada.
 	. Se ocorrer um erro ao salvar a lista de tarefas, retorna um erro.
-. Imprime uma mensagem de confirmação indicando que a tarefa foi concluída.
+. Imprime uma mensagem de confirmaÃ§Ã£o indicando que a tarefa foi concluÃ­da.
 . Retorna sem erro.
 
-tasks, err := LoadTasks(filename) -> Carrega a lista de tarefas existente do arquivo especificado pelo parâmetro 'filename'.
+tasks, err := LoadTasks(filename) -> Carrega a lista de tarefas existente do arquivo especificado pelo parÃ¢metro 'filename'.
 
 if err != nil {...} -> Verifica se ocorreu um erro ao carregar a lista de tarefas. Se sim, retorna um erro.
 
 for i := range tasks {...} -> Itera sobre a lista de tarefas para procurar a tarefa com o ID especificado.
 
-if t.ID == id {...} -> Se a tarefa foi encontrada, a marca como concluída.
+if t.ID == id {...} -> Se a tarefa foi encontrada, a marca como concluÃ­da.
 
-tasks[i].Done = true -> Marca a tarefa como concluída.
+tasks[i].Done = true -> Marca a tarefa como concluÃ­da.
 
-tasks[i].DoneAt = &now -> Atualiza a data de conclusão da tarefa.
+tasks[i].DoneAt = &now -> Atualiza a data de conclusÃ£o da tarefa.
 
 if err := SaveTasks(filename, tasks); err != nil {...} -> Salva a lista de tarefas atualizada e verifica se ocorreu algum erro. Se sim, retorna erro.
 
-OBSERVAÇÕES:
- - A função 'LoadTasks()' é usada para crregar a lista  de tarefas existente.
- - A função 'SaveTasks()' é usada para salvar a lista de tarefas atualizada.
- - A tarefa é marcada como concluída alterando o calor do campo 'Done' para true.
- - Se a tarefa não for encontrada, uma mensagem é impressa informando que a tarefa não existe.
+OBSERVAÃ‡Ã•ES:
+ - A funÃ§Ã£o 'LoadTasks()' Ã© usada para crregar a lista  de tarefas existente.
+ - A funÃ§Ã£o 'SaveTasks()' Ã© usada para salvar a lista de tarefas atualizada.
+ - A tarefa Ã© marcada como concluÃ­da alterando o calor do campo 'Done' para true.
+ - Se a tarefa nÃ£o for encontrada, uma mensagem Ã© impressa informando que a tarefa nÃ£o existe.
 */
 
 func Done(filename string, id int) error {
@@ -251,7 +251,7 @@ func Done(filename string, id int) error {
 	for i := range tasks {
 		if tasks[i].ID == id {
 			if tasks[i].Done {
-				fmt.Println("Essa tarefa já está concluída.")
+				fmt.Println("Essa tarefa jÃ¡ estÃ¡ concluÃ­da.")
 				return nil
 			}
 
@@ -262,29 +262,29 @@ func Done(filename string, id int) error {
 				return err
 			}
 
-			fmt.Println("Tarefa concluída:", tasks[i].Title)
+			fmt.Println("Tarefa concluÃ­da:", tasks[i].Title)
 			return nil
 		}
 	}
 
-	fmt.Println("Tarefa não encontrada.")
+	fmt.Println("Tarefa nÃ£o encontrada.")
 	return nil
 }
 
-/* Função para excluir uma tarefa.
+/* FunÃ§Ã£o para excluir uma tarefa.
 
 . Carrega a lista de tarefas existente.
 	. Se ocorrer um erro ao carregar a lista de tarefas, retorna um erro.
-. Cria uma nova lista de tarefas a serem excluídas.
-	. Se a tarefa foi encontrada, não a inclui na nova lista de tarefas.
-	. Se a tarefa não foi encontrada, a inclui na nova lista de tarefas.
+. Cria uma nova lista de tarefas a serem excluÃ­das.
+	. Se a tarefa foi encontrada, nÃ£o a inclui na nova lista de tarefas.
+	. Se a tarefa nÃ£o foi encontrada, a inclui na nova lista de tarefas.
 . Verifica se a tarefa foi encontrada.
-	. Se a tarefa não foi encontrada, imprime uma mensagem informando.
+	. Se a tarefa nÃ£o foi encontrada, imprime uma mensagem informando.
 . Salva a nova lista de tarefas.
 
 
 
-tasks, err := LoadTasks(filename) -> Carrega a lista de tarefas existente do arquivo especificado pelo parâmetro 'filename'.
+tasks, err := LoadTasks(filename) -> Carrega a lista de tarefas existente do arquivo especificado pelo parÃ¢metro 'filename'.
 
 if err != nil {...}               -> Verifica se ocorreu um erro ao carregar a lista de tarefas. Se sim, retorna erro.
 
@@ -292,19 +292,19 @@ newTasks := []Task{}              -> Cria uma nova lista de tarefas vazia.
 
 for _, t := range tasks {...}     -> Procura a tarefa com o ID especificado.
 
-if t.ID == id {...}               -> Se a tarefa foi encontrada, não a inclui na nova lista e imprime uma mensagem de confirmação.
+if t.ID == id {...}               -> Se a tarefa foi encontrada, nÃ£o a inclui na nova lista e imprime uma mensagem de confirmaÃ§Ã£o.
 
-newTasks = append(newTasks, t)    -> Se a tarefa não foi encontrada, a inclui na nova lista.
+newTasks = append(newTasks, t)    -> Se a tarefa nÃ£o foi encontrada, a inclui na nova lista.
 
-if !found {...}                   -> Verifica se a tarefa foi encontrada. Se não foi, imprime uma mensagem informando.
+if !found {...}                   -> Verifica se a tarefa foi encontrada. Se nÃ£o foi, imprime uma mensagem informando.
 
 return SaveTasks(filename, newTasks) -> Salva a nova lista de tarefas.
 
-OBSERVAÇÕES:
- - A função 'LoadTasks()' é usada para carregar a lista de tarefas existente.
- - A função 'SaveTasks()' é usada para salvar a nova lista de tarefas.
- - A tarefa é excluída da lista de tarefas criando uma nova lista sem a tarefa a ser excluída.
- - Se a tarefa não for encontrada, uma mensagem é impressa informando que a tarefa não existe.
+OBSERVAÃ‡Ã•ES:
+ - A funÃ§Ã£o 'LoadTasks()' Ã© usada para carregar a lista de tarefas existente.
+ - A funÃ§Ã£o 'SaveTasks()' Ã© usada para salvar a nova lista de tarefas.
+ - A tarefa Ã© excluÃ­da da lista de tarefas criando uma nova lista sem a tarefa a ser excluÃ­da.
+ - Se a tarefa nÃ£o for encontrada, uma mensagem Ã© impressa informando que a tarefa nÃ£o existe.
 */
 func Delete(filename string, id int) error {
 	tasks, err := LoadTasks(filename)
@@ -318,14 +318,14 @@ func Delete(filename string, id int) error {
 		if t.ID == id {
 			found = true
 			fmt.Println("Tarefa deletada:", t.Title)
-			// não adiciona no newTasks -> significa que foi "deletada"
+			// nÃ£o adiciona no newTasks -> significa que foi "deletada"
 		} else {
 			newTasks = append(newTasks, t)
 		}
 	}
 
 	if !found {
-		fmt.Println("Tarefa não encontrada.")
+		fmt.Println("Tarefa nÃ£o encontrada.")
 		return nil
 	}
 
@@ -333,34 +333,34 @@ func Delete(filename string, id int) error {
 }
 
 
-/* Função para editar uma tarefa existente.
+/* FunÃ§Ã£o para editar uma tarefa existente.
 
-. Carrega a lista de tarefas existente do arquivo especificado pelo parâmetro 'filename'.
+. Carrega a lista de tarefas existente do arquivo especificado pelo parÃ¢metro 'filename'.
 	. Se ocorrer um erro ao carregar a lista de tarefas, retorna um erro.
-. Itera sobre a lista de tarefas e verifica se a tarefa com o ID especificado pelo parâmetro 'id' existe.
-	. Se a tarefa existir, atualiza o título da tarefa com o novo título especificado pelo parâmetro 'newTitle'.
-. Salva a lista de tarefas atualizada no arquivo especificado pelo parâmetro 'filename'.
+. Itera sobre a lista de tarefas e verifica se a tarefa com o ID especificado pelo parÃ¢metro 'id' existe.
+	. Se a tarefa existir, atualiza o tÃ­tulo da tarefa com o novo tÃ­tulo especificado pelo parÃ¢metro 'newTitle'.
+. Salva a lista de tarefas atualizada no arquivo especificado pelo parÃ¢metro 'filename'.
 	. Se ocorrer um erro ao salvar a lista de tarefas, retorna um erro.
-. Imprime uma mensagem de confirmação indicando que a tarefa foi editada.
+. Imprime uma mensagem de confirmaÃ§Ã£o indicando que a tarefa foi editada.
 . Retorna sem erro.
 
 
 
-tasks, err := LoadTasks(filename) -> Carrega a lista de tarefas existente do arquivo especificado pelo parâmetro 'filename'.
+tasks, err := LoadTasks(filename) -> Carrega a lista de tarefas existente do arquivo especificado pelo parÃ¢metro 'filename'.
 
 if err := nil {...} -> Verifica se ocorreu um erro ao carregar a lista de tarefas. Se sim, retorna erro.
 
 for i := range tasks {...} -> Itera sobre a lista de tarefas para procurar a tarefa com o ID especificado.
 
-if tasks[i].ID == id {...} -> Se a tarefa foi encontrada, atualiza o título da tarefa com o novo título.
+if tasks[i].ID == id {...} -> Se a tarefa foi encontrada, atualiza o tÃ­tulo da tarefa com o novo tÃ­tulo.
 
-old := tasks[i].Title -> Armazena o título antigo da tarefa.
+old := tasks[i].Title -> Armazena o tÃ­tulo antigo da tarefa.
 
-tasks[i].Title = newTitle -> Atualiza o título da tarefa com o novo título.
+tasks[i].Title = newTitle -> Atualiza o tÃ­tulo da tarefa com o novo tÃ­tulo.
 
 if err := SaveTasks(filename, tasks); err := nil {...} -> Salva a lista de tarefas atualizada e verifica se ocorreu erro. Se sim, retorna erro.
 
-fmt.Printf(...) -> Imprime uma mensagem de confirmação indicando que a tarefa foi editada.
+fmt.Printf(...) -> Imprime uma mensagem de confirmaÃ§Ã£o indicando que a tarefa foi editada.
 
 return nil -> Retorna sem erro.
 */
@@ -383,6 +383,6 @@ func Edit(filename string, id int, newTitle string) error {
 		}
 	}
 
-	fmt.Println("Tarefa não encontrada.")
+	fmt.Println("Tarefa nÃ£o encontrada.")
 	return nil
 }
