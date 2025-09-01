@@ -348,21 +348,21 @@ func Delete(filename string, id int) error {
 
 tasks, err := LoadTasks(filename) -> Carrega a lista de tarefas existente do arquivo especificado pelo parâmetro 'filename'.
 
-if err := nil {...} -> Verifica se ocorreu um erro ao carregar a lista de tarefas. Se sim, retorna erro.
+if err := nil {...}               -> Verifica se ocorreu um erro ao carregar a lista de tarefas. Se sim, retorna erro.
 
-for i := range tasks {...} -> Itera sobre a lista de tarefas para procurar a tarefa com o ID especificado.
+for i := range tasks {...}        -> Itera sobre a lista de tarefas para procurar a tarefa com o ID especificado.
 
-if tasks[i].ID == id {...} -> Se a tarefa foi encontrada, atualiza o título da tarefa com o novo título.
+if tasks[i].ID == id {...}        -> Se a tarefa foi encontrada, atualiza o título da tarefa com o novo título.
 
-old := tasks[i].Title -> Armazena o título antigo da tarefa.
+old := tasks[i].Title             -> Armazena o título antigo da tarefa.
 
-tasks[i].Title = newTitle -> Atualiza o título da tarefa com o novo título.
+tasks[i].Title = newTitle         -> Atualiza o título da tarefa com o novo título.
 
 if err := SaveTasks(filename, tasks); err := nil {...} -> Salva a lista de tarefas atualizada e verifica se ocorreu erro. Se sim, retorna erro.
 
-fmt.Printf(...) -> Imprime uma mensagem de confirmação indicando que a tarefa foi editada.
+fmt.Printf(...)                   -> Imprime uma mensagem de confirmação indicando que a tarefa foi editada.
 
-return nil -> Retorna sem erro.
+return nil                        -> Retorna sem erro.
 */
 
 func Edit(filename string, id int, newTitle string) error {
