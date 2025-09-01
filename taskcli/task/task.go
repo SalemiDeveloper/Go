@@ -1,7 +1,7 @@
 package task
 
 import (
-	"enconding/json"
+	"encoding/json"
 	"fmt"
 	"os"
 	"time"
@@ -98,7 +98,7 @@ func SaveTasks(filename string, tasks []Task) error {
 	if err != nil {
 		return err
 	}
-	return os.WriteFile(file, data, 0644)
+	return os.WriteFile(filename, data, 0644)
 }
 
 /* Função para adicionar uma nova tarefa à lista de tarefas
@@ -138,7 +138,7 @@ OBSERVAÇÕES:
 
 func Add(filename, title string) error {
 	tasks, err := LoadTasks(filename)
-	if err := nil {
+	if err != nil {
 		return err
 	}
 
@@ -245,7 +245,7 @@ OBSERVAÇÕES:
 func Done(filename string, id int) error {
 	tasks, err := LoadTasks(filename)
 	if err != nil {
-		return nil
+		return err
 	}
 
 	for i := range tasks {
@@ -315,11 +315,12 @@ func Delete(filename string, id int) error {
 	newTasks := []Task{}
 	found := false
 	for _, t := range tasks {
-		if t.ID = id {
-			newTasks = append(newTasks, t)
-		} else {
+		if t.ID == id {
 			found = true
 			fmt.Println("Tarefa deletada:", t.Title)
+			// não adiciona no newTasks -> significa que foi "deletada"
+		} else {
+			newTasks = append(newTasks, t)
 		}
 	}
 
@@ -330,6 +331,7 @@ func Delete(filename string, id int) error {
 
 	return SaveTasks(filename, newTasks)
 }
+
 
 /* Função para editar uma tarefa existente.
 
@@ -373,7 +375,7 @@ func Edit(filename string, id int, newTitle string) error {
 		if tasks[i].ID == id {
 			old := tasks[i].Title
 			tasks[i].Title = newTitle
-			if err := SaveTasks(filename, tasks); err := nil {
+			if err := SaveTasks(filename, tasks); err != nil {
 				return err
 			}
 			fmt.Printf("Tarefa %d editada: \"%s\" -> \"%s\"\n", id, old, newTitle)
